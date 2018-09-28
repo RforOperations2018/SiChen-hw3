@@ -40,6 +40,11 @@ PitMap <- leaflet() %>%
   #add three layers 
   addCircleMarkers(data=bridge,radius=6,color=~palpoints(bridge$BRBIDGE_NA),stroke=FALSE,fillOpacity = 0.5,group="bridge") %>%
   addPolylines(data=snowroute,color="black",weight=2,group="snowroute") %>%
-  addPolygons(data = cemetry, color = ~palpolygon(PERIMETER),group="cemetry")
+  addPolygons(data = cemetry, color = ~palpolygon(PERIMETER),group="cemetry") %>%
+  #add legend for polgon layer
+  addLegend("bottomright", pal = palpolygon, values = cemetry$PERIMETER,
+            title = "Cemetry Perimeter(meters)",
+            opacity = 1
+            )
 PitMap
 ``` 
