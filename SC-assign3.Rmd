@@ -36,6 +36,10 @@ palpoints <- colorFactor(c("green"), domain = bridge$BRBIDGE_NA)
 PitMap <- leaflet() %>%
   addProviderTiles("OpenStreetMap.BlackAndWhite", group =" Street",options = providerTileOptions(noWrap = TRUE)) %>%
   addProviderTiles("Stamen.Toner", group="Toner",options = providerTileOptions(noWrap = TRUE)) %>%
-  setView(-80,40.5,zoom=10) 
+  setView(-80,40.5,zoom=10)%>%
+  #add three layers 
+  addCircleMarkers(data=bridge,radius=6,color=~palpoints(bridge$BRBIDGE_NA),stroke=FALSE,fillOpacity = 0.5,group="bridge") %>%
+  addPolylines(data=snowroute,color="black",weight=2,group="snowroute") %>%
+  addPolygons(data = cemetry, color = ~palpolygon(PERIMETER),group="cemetry")
 PitMap
-```
+``` 
