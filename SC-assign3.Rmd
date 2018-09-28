@@ -22,3 +22,13 @@ bridge <- readOGR("http://openac-alcogis.opendata.arcgis.com/datasets/65e21a4d53
 cemetry <- readOGR("http://openac-alcogis.opendata.arcgis.com/datasets/4d83e90db45e48a688376c431ceec81f_0.geojson")
 snowroute <- readOGR("https://opendata.arcgis.com/datasets/4c7c1a0184d94ca0a0341c0eef66eb80_1.geojson")
 ```
+
+
+## specify colors
+```{r}
+#specify the color
+palpolygon <- colorNumeric(
+  palette = "RdYlBu",
+  domain= cemetry$PERIMETER)
+palpoints <- colorFactor(c("green"), domain = bridge$BRBIDGE_NA)
+```
