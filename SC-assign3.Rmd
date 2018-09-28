@@ -1,0 +1,24 @@
+---
+title: "hw3"
+author: "Si Chen"
+date: "September 27, 2018"
+output: html_document
+---
+```{r setup, include=FALSE}
+require(rgdal)
+require(leaflet)
+require(leaflet.extras)
+require(dplyr)
+require(readxl)
+require(stringr)
+require(RColorBrewer)
+```
+
+## Points\lines\polygons from GEOJSON
+
+```{r}
+#input GEOJSON data
+bridge <- readOGR("http://openac-alcogis.opendata.arcgis.com/datasets/65e21a4d53b9419b9c422657cac63a1b_0.geojson")
+cemetry <- readOGR("http://openac-alcogis.opendata.arcgis.com/datasets/4d83e90db45e48a688376c431ceec81f_0.geojson")
+snowroute <- readOGR("https://opendata.arcgis.com/datasets/4c7c1a0184d94ca0a0341c0eef66eb80_1.geojson")
+```
