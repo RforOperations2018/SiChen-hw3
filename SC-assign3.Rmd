@@ -45,6 +45,11 @@ PitMap <- leaflet() %>%
   addLegend("bottomright", pal = palpolygon, values = cemetry$PERIMETER,
             title = "Cemetry Perimeter(meters)",
             opacity = 1
-            )
+            ) %>%
+  #add layers control
+    addLayersControl(
+    baseGroups = c("Street", "Toner"),
+    overlayGroups = c("bridge","snowroute","cemetry"),
+                     options = layersControlOptions(collapsed = FALSE))
 PitMap
 ``` 
