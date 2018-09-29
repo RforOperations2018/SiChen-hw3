@@ -28,19 +28,21 @@ snowroute <- readOGR("https://opendata.arcgis.com/datasets/4c7c1a0184d94ca0a0341
 #specify the color
 palpolygon <- colorNumeric(
   palette = "RdYlBu",
-  domain= cemetry$PERIMETER)
+  domain = cemetry$PERIMETER)
 palpoints <- colorFactor(c("green"), domain = bridge$BRBIDGE_NA)
 ```
 ## basemap
 ```{r}
 PitMap <- leaflet() %>%
-  addProviderTiles("OpenStreetMap.BlackAndWhite", group =" Street",options = providerTileOptions(noWrap = TRUE)) %>%
-  addProviderTiles("Stamen.Toner", group="Toner",options = providerTileOptions(noWrap = TRUE)) %>%
-  setView(-80,40.5,zoom=10)%>%
+  addProviderTiles("OpenStreetMap.BlackAndWhite", group =" Street", options = providerTileOptions(noWrap = TRUE)) %>% # Yeah, wrapping is weird
+  # Watch your spacing between arguments. In general spaces on either side of "=" and a space after any commas (,)
+  addProviderTiles("Stamen.Toner", group="Toner", options = providerTileOptions(noWrap = TRUE)) %>%
+  setView(-80,40.5, zoom = 10)%>%
   #add three layers 
-  addCircleMarkers(data=bridge,radius=6,color=~palpoints(bridge$BRBIDGE_NA),stroke=FALSE,fillOpacity = 0.5,group="bridge") %>%
-  addPolylines(data=snowroute,color="black",weight=2,group="snowroute") %>%
-  addPolygons(data = cemetry, color = ~palpolygon(PERIMETER),group="cemetry") %>%
+  # These are VERY green! In the future I would look at some alternative HEX values for a shade that doesn't contrast so deeply
+  addCircleMarkers(data=bridge,radius=6,color=~palpoints(bridge$BRBIDGE_NA), stroke=FALSE, fillOpacity = 0.5, group = "bridge") %>% 
+  addPolylines(data = snowroute,color="black", weight=2, group="snowroute") %>%
+  addPolygons(data = cemetry, color = ~palpolygon(PERIMETER), group="cemetry") %>%
   #add legend for polgon layer
   addLegend("bottomright", pal = palpolygon, values = cemetry$PERIMETER,
             title = "Cemetry Perimeter(meters)",
